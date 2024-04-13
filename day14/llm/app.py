@@ -1,24 +1,17 @@
-from dotenv import load_dotenv
 import streamlit as st
-import os
 import google.generativeai as genai
+import os
 
-load_dotenv()
-key = os.getenv('GOOGLE_API_KEY')
-
+key = os.environ['GOOGLE_API_KEY']
 genai.configure(api_key=key)
-model = genai.GenerativeModel('gemini-pro')
+
+st.title('Chat with Google')
+
+model = genai.GenerativeModel('gemini-1.5-pro-latest')
 chat = model.start_chat(history=[])
 
-def get_answer(question):
-    answer = chat.send_message(question, stream=True)
-    return answer
-
-st.title("Talk to Google Gemini")
-prompt = st.text_input('Ask a question', key='input')
-submit = st.button('Go')
-if submit:
-    answer = get_answer(prompt)
-    st.header('Answer')
-    for chunk in answer:
-        st.write(chunk.text)
+q = st.text_input("You: ")
+if st.button("Ask"):
+    response = chat.send_message(q)
+    st.write(response.text)
+    # st.write(chat.history)
