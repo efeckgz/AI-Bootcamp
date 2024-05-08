@@ -2,3 +2,6 @@
 
 ./.git/objects/46/93f69ccaf22fe05e5a510c3c064e0648dd1b12
 ./.git/lfs/objects/ec/dc/ecdc628ee67847a97fd53ec86496ed1d34a051b323196503192e775362210262
+
+*.h5
+*.keras
